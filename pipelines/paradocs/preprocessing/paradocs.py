@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import argparse
 import pandas as pd
 import sys
@@ -7,6 +5,8 @@ import random
 import gzip
 import csv
 import os
+
+# This code is based on: https://github.com/rewicks/ParaDocs/blob/main/paradocs/paradocs
 
 csv.field_size_limit(sys.maxsize)
 
