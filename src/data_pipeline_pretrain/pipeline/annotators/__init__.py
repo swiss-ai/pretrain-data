@@ -1,0 +1,1 @@
+from .xlmr_embedding_annotator import XLMRobertaEmbeddingAnnotator
