@@ -29,7 +29,16 @@ This section lists the specific datasets and the corresponding scripts to proces
 - **`DCLM-Edu`**: 
 First Download [DCLM-Edu](https://huggingface.co/datasets/HuggingFaceTB/dclm-edu/tree/main/data) and run `python pipelines/dclm-edu/main.py quality_33-filterrobots` or `python pipelines/fineweb/main.py filterrobots_fine`.
 - **`FineWeb-Edu`**: First Download [FineWeb-Edu-Score-2](https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu-score-2/tree/v1.0.0/data) or [FineWeb-Edu](https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu/tree/v1.0.0/data), then adjust and run `python pipelines/fineweb/main.py filterrobots` or `python pipelines/fineweb/main.py filterrobots `.
-- **`Code`**: First Download [Starcoder Data](https://huggingface.co/datasets/bigcode/starcoderdata), then run [TBD] 
+- **`Code`**: Datasets consists of two original datasets:
+    1. [StarCoderData](https://huggingface.co/datasets/bigcode/starcoderdata)
+    2. [CommonPile/Stackv2](https://huggingface.co/datasets/common-pile/stackv2)
+  To download the datasets we can utilize ```downloader.py``` at the ```examples/code_pipeline/```.
+  CommonPile/Stackv2 is a open-licensed filtered version of Stackv2 annotated with the educational value ranging from 0-4. In order to follow similar format we decided to create the following pipeline at: ```examples/code_pipeline/```, consisting of following steps:
+    2. Annotation ```annotator.py```: Annotation of some of the samples from per language using [Qwen/Qwen2.5-Coder-32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct)
+    3. Processor ```postprocessor.py```: Processing and formatting of the annotations in order to train the classifiers for each language and unify metrics from annotations.
+    4. Training ```classifiers```: Training of the classifiers, based on the [microsoft/codebert-base](https://huggingface.co/microsoft/codebert-base).
+    5. Classifying ```classify.py```: Finally, classification of all samples from each of the languages and finally utilizing postprocessor in order to simplify the metrics.
+  This results in the final dataset with code quality values from 0-4, available at [TODO] along with classifiers [TODO].
 - **`Math`**: 
 First Download [FineMath](https://huggingface.co/datasets/HuggingFaceTB/finemath) or [MegaMath](https://huggingface.co/datasets/LLM360/MegaMath), then adjust and run `python pipelines/finemath/main.py filterrobots_fine` or `python pipelines/megamath/main.py filterrobots`.
 - **`Cooldown`** Download [Euroblocks](https://huggingface.co/datasets/utter-project/EuroBlocks-SFT-Synthetic-1124/tree/main) or [Europarl](https://huggingface.co/datasets/Helsinki-NLP/europarl) and run `python pipelines/fineweb/main_bidirectional.py`, `python pipelines/euroblocks/main.py`, respectively. For [Paradocs](https://huggingface.co/datasets/jhu-clsp/paradocs/blob/main/files.yml) you need to adjust and run `python pretrain-data/pipelines/paradocs/preprocessing/run.py`, then `pretrain-data/pipelines/paradocs/main.py`.
