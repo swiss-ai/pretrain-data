@@ -32,12 +32,13 @@ First Download [DCLM-Edu](https://huggingface.co/datasets/HuggingFaceTB/dclm-edu
 - **`Code`**: Datasets consists of two original datasets:
     1. [StarCoderData](https://huggingface.co/datasets/bigcode/starcoderdata)
     2. [CommonPile/Stackv2](https://huggingface.co/datasets/common-pile/stackv2)
+    
   To download the datasets we can utilize ```downloader.py``` at the ```examples/code_pipeline/```.
-  CommonPile/Stackv2 is a open-licensed filtered version of Stackv2 annotated with the educational value ranging from 0-4. In order to follow similar format we decided to create the following pipeline at: ```examples/code_pipeline/```, consisting of following steps:
-    2. Annotation ```annotator.py```: Annotation of some of the samples from per language using [Qwen/Qwen2.5-Coder-32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct)
-    3. Processor ```postprocessor.py```: Processing and formatting of the annotations in order to train the classifiers for each language and unify metrics from annotations.
-    4. Training ```classifiers```: Training of the classifiers, based on the [microsoft/codebert-base](https://huggingface.co/microsoft/codebert-base).
-    5. Classifying ```classify.py```: Finally, classification of all samples from each of the languages and finally utilizing postprocessor in order to simplify the metrics.
+  [CommonPile/Stackv2](https://huggingface.co/datasets/common-pile/stackv2) is a open-licensed filtered version of The Stackv2 annotated with the educational value ranging from 0-4. In order to follow similar format we decided to create the following pipeline at: ```examples/code_pipeline/```, consisting of following steps:
+    1. Annotation ```annotator.py```: Annotation of some of the samples from per language using [Qwen/Qwen2.5-Coder-32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct)
+    2. Processor ```postprocessor.py```: Processing and formatting of the annotations in order to train the classifiers for each language and unify metrics from annotations.
+    3. Training ```classifiers```: Training of the classifiers, based on the [microsoft/codebert-base](https://huggingface.co/microsoft/codebert-base).
+    4. Classifying ```classify.py```: Finally, classification of all samples from each of the languages and finally utilizing postprocessor in order to simplify the metrics.
   This results in the final dataset with code quality values from 0-4, that we be obtained by applying [classifiers](https://huggingface.co/Machacini/code-classifiers) to the individual languages in the dataset.
 - **`Math`**: 
 First Download [FineMath](https://huggingface.co/datasets/HuggingFaceTB/finemath) or [MegaMath](https://huggingface.co/datasets/LLM360/MegaMath), then adjust and run `python pipelines/finemath/main.py filterrobots_fine` or `python pipelines/megamath/main.py filterrobots`.
